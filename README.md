@@ -1,5 +1,5 @@
 ---
-title: Mcp Sentiment
+title: MCP Sentiment
 emoji: 🏆
 colorFrom: yellow
 colorTo: blue
