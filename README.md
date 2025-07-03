@@ -45,40 +45,60 @@ Clear	Reset the input/output
 Setup Instructions
 1. Clone the repository
 bash
+
 Copy code
+
 git clone https://github.com/YOUR_USERNAME/mcp-sentiment
+
 cd mcp-sentiment
 
 2. Create a virtual environment
+
 bash
+
 Copy code
+
 python -m venv .venv
 
 Then activate:
+
 .venv\Scripts\activate      # Windows
 source .venv/bin/activate   # macOS/Linux
 
 3. Install dependencies
+
 bash
+
 Copy code
+
 pip install -r requirements.txt
+
 Ensure gradio[mcp] is included for MCP compatibility.
 
 4. Add Hugging Face token
+
 Create a .env file:
 
 ini
+
 Copy code
+
 HF_TOKEN=your_token_here
 
 5. Run the app locally
+
 bash
+
 Copy code
+
 python app.py
 
 Deploy to Hugging Face Spaces
+
 bash
+
 Copy code
+
 git init
 git remote add origin https://huggingface.co/spaces/YOUR_USERNAME/mcp-sentiment
 git add .
