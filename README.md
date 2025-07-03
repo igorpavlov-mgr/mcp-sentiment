@@ -8,7 +8,7 @@ sdk_version: 5.35.0
 app_file: app.py
 pinned: false
 license: mit
-short_description: Sentiment analysis tool using Gradio and TextBlob, with MCP
+short_description: Sentiment + Sarcasm Analyzer tool using Gradio, DistilBERT with MCP
 ---
 
 Check out the configuration reference at https://huggingface.co/docs/hub/spaces-config-reference

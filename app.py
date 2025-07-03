@@ -1,35 +1,55 @@
 import json
 import gradio as gr
-from textblob import TextBlob
+from transformers import pipeline
 
-def sentiment_analysis(text: str) -> str:
+# Load models (both CPU-friendly)
+sentiment_classifier = pipeline("sentiment-analysis", model="distilbert-base-uncased-finetuned-sst-2-english")
+sarcasm_classifier = pipeline("text-classification", model="helinivan/english-sarcasm-detector")
+
+def analyze_text(text: str) -> str:
     """
-    Analyze the sentiment of the given text.
+    Analyze sentiment and detect sarcasm in the given text.
 
     Args:
         text (str): The text to analyze
 
     Returns:
-        str: A JSON string containing polarity, subjectivity, and assessment
+        str: A JSON string with sentiment and sarcasm info
     """
-    blob = TextBlob(text)
-    sentiment = blob.sentiment
+    sentiment_result = sentiment_classifier(text)[0]
+    sarcasm_result = sarcasm_classifier(text)[0]
+    sarcasm_label = sarcasm_result["label"].lower()
+    sarcasm_score = round(sarcasm_result["score"], 3)
 
     result = {
-        "polarity": round(sentiment.polarity, 2),
-        "subjectivity": round(sentiment.subjectivity, 2),
-        "assessment": "positive" if sentiment.polarity > 0 else "negative" if sentiment.polarity < 0 else "neutral"
+        "assessment": sentiment_result["label"].lower(),  # positive / negative
+        "confidence": round(sentiment_result["score"], 3),
+        "sarcasm_detected": sarcasm_label == "sarcasm" or sarcasm_score > 0.9,
+        "sarcasm_confidence": sarcasm_score
     }
 
     return json.dumps(result)
 
 demo = gr.Interface(
-    fn=sentiment_analysis,
+    fn=analyze_text,
     inputs=gr.Textbox(placeholder="Enter text to analyze..."),
-    outputs=gr.Textbox(),  # Use gr.Textbox() instead of gr.JSON()
-    title="Text Sentiment Analysis",
-    description="Analyze the sentiment of text using TextBlob"
+    outputs=gr.Textbox(),
+    title="Sentiment + Sarcasm Analyzer",
+    description=(
+        "This app performs sentiment analysis and sarcasm detection using CPU-compatible Hugging Face models. "
+        "Integrated with Hugging Face's MCP (Multimodal Client Protocol) for seamless agent-to-app communication.\n\n"
+        "⚙️ Models used:**\n\n"
+        " • `distilbert-base-uncased-finetuned-sst-2-english` — sentiment analysis\n\n"
+        " • `helinivan/english-sarcasm-detector` — sarcasm detection (fine-tuned BERT)\n\n"
+        "🧾 Output format:**\n\n"
+        " • `assessment`: Sentiment label (`\"positive\"` or `\"negative\"`)\n\n"
+        " • `confidence`: Sentiment model's confidence score\n\n"
+        " • `sarcasm_detected`: Boolean indicating if sarcasm was detected\n\n"
+        " • `sarcasm_confidence`: Confidence score from sarcasm classifier\n\n"
+        "🚩 Use the **Flag** button to report interesting or incorrect outputs (e.g., edge cases or sarcasm errors)."
+    )
 )
+
 
 if __name__ == "__main__":
     demo.launch(mcp_server=True)
