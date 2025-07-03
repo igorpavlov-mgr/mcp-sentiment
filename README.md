@@ -1,15 +1,15 @@
 Sentiment + Sarcasm Analyzer (Gradio + MCP)
 This project is a lightweight Gradio application that performs sentiment analysis and sarcasm detection using Hugging Face Transformers. It is designed to run on CPU and was developed as part of the Hugging Face MCP Course. The app is fully compatible with the Hugging Face MCP server architecture.
 
-Live Demo
-👉 Launch the app on Hugging Face Spaces
+## Live Demo
+👉 [Launch the app on Hugging Face Spaces](https://huggingface.co/spaces/igorpavlov-mgr/mcp-sentiment)
+
 
 Architecture Overview
 Models (CPU-only):
 
-distilbert-base-uncased-finetuned-sst-2-english: Sentiment analysis
-
-helinivan/english-sarcasm-detector: Sarcasm detection
+- distilbert-base-uncased-finetuned-sst-2-english: Sentiment analysis
+- helinivan/english-sarcasm-detector: Sarcasm detection
 
 Frontend: Gradio UI
 
@@ -18,15 +18,10 @@ Backend: Python with Hugging Face Transformers
 MCP Integration: Hugging Face MCP-compatible (gradio[mcp])
 
 Features
-Sentiment classification: "positive" or "negative"
-
-Sarcasm detection with a probability score
-
-CPU-compatible (no GPU required)
-
-Simple and clean Gradio interface
-
-Flag button for data collection and feedback
+- Sentiment classification: "positive" or "negative"
+- Sarcasm detection with a probability score
+- CPU-compatible (no GPU required)
+- Simple and clean Gradio interface
 
 Output Format
 The app returns a structured JSON response with four fields:
@@ -46,14 +41,6 @@ Element	Description
 Textbox	Enter text to be analyzed
 Submit	Run the sentiment and sarcasm analysis
 Clear	Reset the input/output
-Flag	Report incorrect or ambiguous results
-
-Flagged data is saved locally (if not configured otherwise) in:
-
-bash
-Copy code
-flagged/log.csv
-Each log contains the input text, model outputs, and optionally a reason.
 
 Setup Instructions
 1. Clone the repository
@@ -65,7 +52,8 @@ cd mcp-sentiment
 bash
 Copy code
 python -m venv .venv
-# Then activate:
+
+Then activate:
 .venv\Scripts\activate      # Windows
 source .venv/bin/activate   # macOS/Linux
 3. Install dependencies
