@@ -48,6 +48,7 @@ bash
 Copy code
 git clone https://github.com/YOUR_USERNAME/mcp-sentiment
 cd mcp-sentiment
+
 2. Create a virtual environment
 bash
 Copy code
@@ -56,6 +57,7 @@ python -m venv .venv
 Then activate:
 .venv\Scripts\activate      # Windows
 source .venv/bin/activate   # macOS/Linux
+
 3. Install dependencies
 bash
 Copy code
@@ -68,10 +70,12 @@ Create a .env file:
 ini
 Copy code
 HF_TOKEN=your_token_here
+
 5. Run the app locally
 bash
 Copy code
 python app.py
+
 Deploy to Hugging Face Spaces
 bash
 Copy code
@@ -80,13 +84,11 @@ git remote add origin https://huggingface.co/spaces/YOUR_USERNAME/mcp-sentiment
 git add .
 git commit -m "Deploy MCP app"
 git push -u origin main
+
 Once pushed, the MCP server endpoint will be live on your Hugging Face Space.
 
-Credits
-Hugging Face MCP Course
-
-Model: distilbert-base-uncased-finetuned-sst-2-english
-
-Model: helinivan/english-sarcasm-detector
-
-Gradio
+Credits:
+- Hugging Face MCP Course
+- Model: distilbert-base-uncased-finetuned-sst-2-english
+- Model: helinivan/english-sarcasm-detector
+- Gradio
