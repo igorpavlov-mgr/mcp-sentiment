@@ -37,7 +37,7 @@ demo = gr.Interface(
     title="Sentiment + Sarcasm Analyzer",
     description=(
         "This app performs sentiment analysis and sarcasm detection using CPU-compatible Hugging Face models. "
-        "Integrated with Hugging Face's MCP (Multimodal Client Protocol) for seamless agent-to-app communication.\n\n"
+        "Integrated with Hugging Face's MCP for seamless agent-to-app communication.\n\n"
         "⚙️ Models used:**\n\n"
         " • `distilbert-base-uncased-finetuned-sst-2-english` — sentiment analysis\n\n"
         " • `helinivan/english-sarcasm-detector` — sarcasm detection (fine-tuned BERT)\n\n"
